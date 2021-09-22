@@ -1,8 +1,5 @@
 const User = require('../models/userModel')
-
-exports.createUser = (req,res) =>{
-    res.send("hello user")
-}
+const util = require('../utils/generateToken')
 
 exports.registerUser = async(req, res) => {
     const {name, email, password, dob} = req.body;
@@ -40,7 +37,12 @@ exports.registerUser = async(req, res) => {
     .then(user=>{
         return res.status(200).json({
             success: true, 
-            data: user
+            data: {
+                name: user.name,
+                email: user.email,
+                dob: user.dob,
+                token: util.generateToken(user._id)
+            }
         })
     })
     .catch(err=>{
@@ -51,4 +53,42 @@ exports.registerUser = async(req, res) => {
         })
     })
 
+}
+
+exports.loginUser = async(req, res) => {
+    const {email, password} = req.body
+
+    if(!email || !password){
+        return res.status(422).json({
+            success: false,
+            message: "Please fill all the required fields."
+        })
+    }
+    let user;
+    try{
+        user = await User.findOne({email})
+    }catch(err){
+        console.log(err)
+        return res.status(500).json({
+            success: false,
+            message: "Something went wrong"
+        })
+    }
+
+    if(user && await user.matchPassword(password)){
+        return res.status(200).json({
+            success: true,
+            data: {
+                name: user.name,
+                email: user.email,
+                dob: user.dob,
+                token: util.generateToken(user._id)
+            }
+        })
+    }else{
+        res.status(400).json({
+            success: false,
+            message: "Invalid email or password."
+        })
+    }
 }
