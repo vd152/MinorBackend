@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
+
 dotenv.config();
+
+var passport = require('passport');
+require('./config/passport')(passport);
 
 const userRouter = require('./routers/userRouter')
 const PORT = 5000
@@ -15,6 +19,8 @@ app.use(
 app.use(express.json());
 app.use('/user', userRouter);
 
+app.use(passport.initialize());
+
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -25,7 +31,7 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-app.get('/', (req,res)=>{
+app.get('/', passport.authenticate('jwt',{session: false}), (req,res)=>{
     res.send("Hi there")
 })
 
