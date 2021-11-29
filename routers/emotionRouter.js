@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const controller = require('../models/emotionController')
+const controller = require('../controllers/emotionController')
 
-router.get('/', controller.getEmotion);
+router.post('/', controller.getEmotion);
 
 module.exports = router;

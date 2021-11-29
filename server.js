@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+var cors = require('cors')
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path')
@@ -21,6 +22,8 @@ app.use(
 app.use(express.json());
 app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, './public')))
+app.use(cors())
+
 
 mongoose
   .connect(process.env.MONGO_URI, {
