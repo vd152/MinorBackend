@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path')
 
+
 dotenv.config();
 
 var passport = require('passport');
@@ -12,6 +13,7 @@ require('./config/passport')(passport);
 
 const userRouter = require('./routers/userRouter')
 const emotionRouter = require('./routers/emotionRouter')
+const musicRouter = require('./routers/musicRouter')
 const PORT = 5000
 
 app.use(
@@ -37,6 +39,7 @@ mongoose
 
 app.use('/user', userRouter);
 app.use('/emotion', emotionRouter);
+app.use('/music', musicRouter);
 app.get('/', passport.authenticate('jwt',{session: false}), (req,res)=>{
     res.send("Hi there")
 })
