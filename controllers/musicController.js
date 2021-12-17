@@ -2,10 +2,30 @@ const csv = require("csvtojson");
 const MusicData = require("../models/musicDataModel");
 
 exports.getAudioMood = async (req, res) => {};
+exports.searchSongs = async (req, res) => {
+  const searchWord = req.query.search
+  MusicData.find({ songName: { $regex: searchWord, $options: "i" }}).limit(100).then(results=>{
+    return res.status(200).json({
+      songs: results
+    })
+  }).catch(err => {
+    console.log(err)
+    return res.status(500).json({message: "Something went wrong."})
+  })
+}
 exports.getSongByYear = async (req, res) => {
   let year = req.params.year
-  MusicData.find({year: year}).then(results=>{
-    console.log(results)
+  MusicData.find({year: year}).sort({'popularity': -1}).then(results=>{
+    //console.log(results)
+    return res.status(200).json({
+      songs: results
+    })
+  }).catch(err=>{
+    return res.status(500).json({message: "Something went wrong."})
+  })
+};
+exports.getPopularSongs = async (req, res) => {
+  MusicData.find({}).sort({'popularity': -1}).limit(100).then(results=>{
     return res.status(200).json({
       songs: results
     })
@@ -13,7 +33,7 @@ exports.getSongByYear = async (req, res) => {
     console.log(err)
     return res.status(500).json({message: "Something went wrong."})
   })
-};
+}
 exports.saveMusicData = async (req, res) => {
   const csvFilePath = "C:/Users/Vidhi/Desktop/music app backend/data/music.csv";
   let result;
