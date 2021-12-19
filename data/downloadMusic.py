@@ -147,7 +147,7 @@ def main():
             arr.append(i)
         csvdata.append(arr)
     #print(csvdata[1])
-    for i in range(301, len(csvdata)):
+    for i in range(651, len(csvdata)):
         print("Downloading song id... "+csvdata[i][0])
         single_download(csvdata[i][7]+" "+csvdata[i][8], csvdata[i][0])
     #single_download(csvdata[1][7], csvdata[1][0])
