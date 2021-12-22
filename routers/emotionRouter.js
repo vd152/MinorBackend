@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const controller = require('../controllers/emotionController')
+var passport = require('passport');
 
-router.post('/', controller.getEmotion);
+router.post('/',passport.authenticate('jwt',{session: false}), controller.getEmotion);
 
 module.exports = router;

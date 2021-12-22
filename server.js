@@ -4,7 +4,7 @@ var cors = require('cors')
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path')
-
+const fs = require('fs');
 
 dotenv.config();
 
@@ -40,8 +40,8 @@ mongoose
 app.use('/user', userRouter);
 app.use('/emotion', emotionRouter);
 app.use('/music', musicRouter);
-app.get('/', passport.authenticate('jwt',{session: false}), (req,res)=>{
-    res.send("Hi there")
+app.get('/', (req,res)=>{
+    res.send("API Working")
 })
 
 app.listen(PORT,()=>{

@@ -20,6 +20,7 @@
     "face-api.js": "^0.22.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.5",
+    "mongoose-simple-random": "^0.4.1",
     "passport": "^0.5.0",
     "passport-jwt": "^4.0.0"
   },

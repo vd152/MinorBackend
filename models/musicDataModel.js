@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var random = require('mongoose-simple-random');
 
 const musicDataSchema = new mongoose.Schema(
   {
@@ -16,6 +17,9 @@ const musicDataSchema = new mongoose.Schema(
       required: true,
     },
     ftArtist: {
+      type: String,
+    },
+    mood:{
       type: String,
     },
     explicit: {
@@ -63,5 +67,5 @@ const musicDataSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
+musicDataSchema.plugin(random);
 module.exports = MusicData = mongoose.model("musicData", musicDataSchema, 'musicData');

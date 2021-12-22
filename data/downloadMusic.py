@@ -115,7 +115,7 @@ def single_download(song=None, id=None):
             print('No search results found')
             exit(1)
         # make command that will be later executed
-        command = f'youtube-dl --no-warnings --extract-audio --audio-format mp3 -o "/data/musicData/{id}.%(ext)s" ' + search_results[0]
+        command = f'youtube-dl --no-warnings --extract-audio --audio-format mp3 -o "/data/musicData/{id}.%(ext)s" ' + search_results[1]
         
     else:      # For a link
         # make command that will be later executed
@@ -147,7 +147,9 @@ def main():
             arr.append(i)
         csvdata.append(arr)
     #print(csvdata[1])
-    for i in range(651, len(csvdata)):
+    newar=  [115, 285, 360, 415, 435, 496, 518, 582, 664, 728, 795, 901, 959]
+    # for i in range(981, len(csvdata)):
+    for i in newar:
         print("Downloading song id... "+csvdata[i][0])
         single_download(csvdata[i][7]+" "+csvdata[i][8], csvdata[i][0])
     #single_download(csvdata[1][7], csvdata[1][0])
