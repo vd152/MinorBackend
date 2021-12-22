@@ -8,6 +8,6 @@ router.get('/search',passport.authenticate('jwt',{session: false}), controller.s
 router.get('/updatedb',passport.authenticate('jwt',{session: false}), controller.saveMusicData);
 router.get('/classify',passport.authenticate('jwt',{session: false}), controller.classifyMusicData);
 router.get('/:year',passport.authenticate('jwt',{session: false}), controller.getSongByYear);
-router.get('/play/:id',passport.authenticate('jwt',{session: false}), controller.getMusicById);
+router.get('/play/:id', controller.getMusicById);
 
 module.exports = router;

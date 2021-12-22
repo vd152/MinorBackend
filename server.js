@@ -4,7 +4,6 @@ var cors = require('cors')
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path')
-const fs = require('fs');
 
 dotenv.config();
 
