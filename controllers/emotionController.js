@@ -8,9 +8,8 @@ exports.getEmotion = async(req, res)=>{
     await faceapi.nets.ssdMobilenetv1.loadFromDisk('./public/models')
     await faceapi.nets.faceRecognitionNet.loadFromDisk('./public/models');
     await faceapi.nets.faceExpressionNet.loadFromDisk('./public/models');
-    const image = req.body.image
-    //const image = "https://vidhiangrish.com/assets/img/picture.png"
-    //const image = "https://thumbs.dreamstime.com/z/beautiful-asian-young-woman-sad-face-expression-emotion-despair-sadness-130837248.jpg"
+    const image = req.body.image //base64string
+
     const img = await canvas.loadImage(image)
     try{
         const detections = await faceapi.detectSingleFace(img).withFaceExpressions();
