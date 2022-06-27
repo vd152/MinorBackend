@@ -74,7 +74,7 @@ exports.getMusicById = async (req, res) => {
    }
 }
 exports.saveMusicData = async (req, res) => {
-  const csvFilePath = "..//data/music.csv";
+  const csvFilePath = "D:/webdev stuff/minor project/music app backend/data/music.csv";
   let result;
   try {
     result = await csv().fromFile(csvFilePath);
@@ -114,7 +114,7 @@ exports.saveMusicData = async (req, res) => {
     //return res.status(200).json({message:`successfully added songs`});
 };
 exports.classifyMusicData = async (req, res) => {
-  const csvFilePath = "../data/mean.csv";
+  const csvFilePath = "D:/webdev stuff/minor project/music app backend/data/mean.csv";
   let result;
   try {
     result = await csv().fromFile(csvFilePath);
